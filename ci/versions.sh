@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "${1}"
+docker build -t ${DOCKER_REPO}/${1}:${2} .
