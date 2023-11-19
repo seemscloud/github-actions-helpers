@@ -1,13 +1,13 @@
 #!/bin/bash
 
-if [ -f .versions ] && [ $(cat debug/.versions | grep "${2}") ] ; then
+if [ -f .versions ] && [ $(cat .versions | grep "${2}") ] ; then
   echo docker build -t "${DOCKER_REPO}/${1}:${2}" .
   echo docker push "${DOCKER_REPO}/${1}:${2}"
 
   git checkout main
   git pull
 
-  ls -lh 
+  ls -lh
   echo "${1}" >> .versions
   cat .versions | sort | uniq > .versions_BKP
   mv .versions_BKP .versions
