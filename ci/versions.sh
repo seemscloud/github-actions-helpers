@@ -7,8 +7,8 @@ echo "${IMAGE_CHECK}"
 if [ "${IMAGE_CHECK}" == "${1}" ] ; then
   touch .versions
   if [ ! `cat .versions | grep "${2}"` ] ; then
-    echo docker build -t "${DOCKER_REPO}/${1}:${2}" .
-    echo docker push "${DOCKER_REPO}/${1}:${2}"
+    docker build -t "${DOCKER_REPO}/${1}:${2}" .
+    docker push "${DOCKER_REPO}/${1}:${2}"
 
     git checkout main
     git pull
