@@ -5,7 +5,8 @@ IMAGE_CHECK=$(echo "${GITHUB_REF}" | sed "s/refs\/tags\///g" | grep -Po "^[a-z0-
 echo "${IMAGE_CHECK}"
 
 if [ "${IMAGE_CHECK}" == "${1}" ] ; then
-  if [ -f .versions ] && [ ! `cat .versions | grep "${2}"` ] ; then
+  touch .versions
+  if [ ! `cat .versions | grep "${2}"` ] ; then
     echo docker build -t "${DOCKER_REPO}/${1}:${2}" .
     echo docker push "${DOCKER_REPO}/${1}:${2}"
 
@@ -13,7 +14,7 @@ if [ "${IMAGE_CHECK}" == "${1}" ] ; then
     git pull
 
     ls -lh
-    echo "${1}" >> .versions
+    echo "${2}" >> .versions
     cat .versions | sort | uniq > .versions_BKP
     mv .versions_BKP .versions
     rm -f .versions_BKP
