@@ -6,7 +6,7 @@ IMAGE_VERSION=$(echo "${2}" | grep -Po "[a-z0-9]+-v\K.*")
 if [ "${IMAGE_CHECK}" == "${1}" ] ; then
   touch .versions
   if [ ! `cat .versions | grep "${IMAGE_VERSION}"` ] ; then
-    docker build -t "${DOCKER_REPO}/${1}:${IMAGE_VERSION}" .
+    docker build -t "${DOCKER_REPO}/${1}:${IMAGE_VERSION}" t "${DOCKER_REPO}/${1}:latest" .
     docker push "${DOCKER_REPO}/${1}:${IMAGE_VERSION}"
     docker push "${DOCKER_REPO}/${1}:latest"
 
