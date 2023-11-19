@@ -1,8 +1,8 @@
 #!/bin/bash
 
-env
+IMAGE_CHECK=$(echo "${GITHUB_REF}" | sed "s/refs\/tags\///g" | grep -Po "^[a-z0-9]+")
 
-if [ -f .versions ] && [ ! $(cat .versions | grep "${2}") ] ; then
+if [ "${IMAGE_CHECK}" == "${2}" ] && [ -f .versions ] && [ ! $(cat .versions | grep "${2}") ] ; then
   echo docker build -t "${DOCKER_REPO}/${1}:${2}" .
   echo docker push "${DOCKER_REPO}/${1}:${2}"
 
