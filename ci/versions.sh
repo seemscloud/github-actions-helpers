@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IMAGE_CHECK=$(echo "${GITHUB_REF}" | sed "s/refs\/tags\///g" | grep -Po "^[a-z0-9]+")
-IMAGE_VERSION=$(echo "debug-v1.0.2" | grep -Po "[a-z0-9]+-v\K.*")
+IMAGE_VERSION=$(echo "${2}" | grep -Po "[a-z0-9]+-v\K.*")
 
 if [ "${IMAGE_CHECK}" == "${1}" ] ; then
   touch .versions
