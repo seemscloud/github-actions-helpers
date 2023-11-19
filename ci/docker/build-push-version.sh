@@ -8,6 +8,7 @@ if [ "${IMAGE_CHECK}" == "${1}" ] ; then
   if [ ! `cat .versions | grep "${IMAGE_VERSION}"` ] ; then
     docker build -t "${DOCKER_REPO}/${1}:${IMAGE_VERSION}" .
     docker push "${DOCKER_REPO}/${1}:${IMAGE_VERSION}"
+    docker push "${DOCKER_REPO}/${1}:latest"
 
     git checkout main
     git pull
