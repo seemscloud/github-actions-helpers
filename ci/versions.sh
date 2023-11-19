@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -f .versions ] && [ $(cat .versions | grep "${2}") ] ; then
+if [ -f .versions ] && [ ! $(cat .versions | grep "${2}") ] ; then
   echo docker build -t "${DOCKER_REPO}/${1}:${2}" .
   echo docker push "${DOCKER_REPO}/${1}:${2}"
 
