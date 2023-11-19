@@ -7,6 +7,7 @@ if [ -f .versions ] && [ $(cat debug/.versions | grep "${2}") ] ; then
   git checkout main
   git pull
 
+  ls -lh 
   echo "${1}" >> .versions
   cat .versions | sort | uniq > .versions_BKP
   mv .versions_BKP .versions
